@@ -375,7 +375,26 @@ function(set_not_found_package_names var)
     set("${var}" "${value}" PARENT_SCOPE)
 endfunction()
 
-function(print_variables messageMode prefix)
+function(
+    set_target_names
+    var
+    dir
+)
+    get_property(subdirectories DIRECTORY "${dir}" PROPERTY SUBDIRECTORIES)
+    foreach(subdir ${subdirectories})
+        set_target_names(subTargets "${subdir}")
+    endforeach()
+    if(NOT "${subTargets}" STREQUAL "")
+        list(APPEND targets "${subTargets}")
+    endif()
+    get_property(currentTargets DIRECTORY "${dir}" PROPERTY BUILDSYSTEM_TARGETS)
+    if(NOT "${currentTargets}" STREQUAL "")
+        list(APPEND targets "${currentTargets}")
+    endif()
+    set(${var} "${targets}" PARENT_SCOPE)
+endfunction()
+
+#[[function(print_variables messageMode prefix)
     foreach(n ${ARGN})
         if("" STREQUAL "${messageMode}")
             message("${prefix}${n}: '${${n}}'")
@@ -383,9 +402,9 @@ function(print_variables messageMode prefix)
             message("${messageMode}" "${prefix}${n}: '${${n}}'")
         endif()
     endforeach()
-endfunction()
+endfunction()]]
 
-function(print_environment_variables messageMode prefix)
+#[[function(print_environment_variables messageMode prefix)
     foreach(n ${ARGN})
         if("" STREQUAL "${messageMode}")
             message("${prefix}${n}: '$ENV{${n}}'")
@@ -393,7 +412,7 @@ function(print_environment_variables messageMode prefix)
             message("${messageMode}" "${prefix}ENV{${n}}: '$ENV{${n}}'")
         endif()
     endforeach()
-endfunction()
+endfunction()]]
 
 #[[macro(print_all_variables projectName messageMode prefix)
     if("" STREQUAL "${projectName}")
@@ -427,24 +446,3 @@ endfunction()
         endforeach()
     endif()
 endmacro()]]
-
-#[[
-macro(
-    set_targets_recursive
-    targets
-    dir
-)
-    get_property(subdirectories DIRECTORY ${dir} PROPERTY SUBDIRECTORIES)
-    foreach(subdir ${subdirectories})
-        set_targets_recursive(${targets} ${subdir})
-    endforeach()
-    get_property(current_targets DIRECTORY ${dir} PROPERTY BUILDSYSTEM_TARGETS)
-    list(APPEND ${targets} ${current_targets})
-endmacro()
-
-function(set_targets var)
-    set(targets)
-    set_targets_recursive(targets ${CMAKE_CURRENT_SOURCE_DIR})
-    set(${var} ${targets} PARENT_SCOPE)
-endfunction()
-]]
