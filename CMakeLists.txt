@@ -12,5 +12,4 @@ include("config.cmake")
 
 #add_subdirectory("${PROJECT_NAME}-0")
 #add_subdirectory("${PROJECT_NAME}-1")
-#add_subdirectory("${PROJECT_NAME}-2")
-add_subdirectory("${PROJECT_NAME}-3")
+add_subdirectory("${PROJECT_NAME}-2")

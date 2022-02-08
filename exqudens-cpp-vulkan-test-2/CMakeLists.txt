@@ -14,7 +14,7 @@ set_conan_settings(CONAN_SETTINGS
     "${CMAKE_CXX_STANDARD}"
     "${CMAKE_BUILD_TYPE}"
     "vulkan:build_type=Release"
-    "vulkan:compiler.runtime=${CONAN_COMPILER_RUNTIME}"
+    "vulkan:compiler.runtime=MD"
     "glfw:build_type=Release"
     "glfw:compiler.runtime=${CONAN_COMPILER_RUNTIME}"
 )
@@ -79,13 +79,13 @@ foreach(
 
     list(APPEND CMAKE_PREFIX_PATH "${cmakePackagePath}")
 
-    if("vulkan" STREQUAL "${cmakePackageName}")
+    if("vulkan" STREQUAL "${conanPackageName}")
         find_package("${cmakePackageName}" "${cmakePackageVersion}" EXACT QUIET)
-        find_program(GLSLC_COMMAND NAMES "glslc.exe" "glslc" PATHS "${cmakePackagePath}/bin" NO_CACHE)
+        find_program(GLSLC_COMMAND NAMES "glslc.exe" "glslc" PATHS "${cmakePackagePath}/bin")
     elseif("glm" STREQUAL "${conanPackageName}")
         find_package("${cmakePackageName}" "${cmakePackageVersion}" EXACT QUIET)
     elseif("lodepng" STREQUAL "${conanPackageName}")
-        find_package("${cmakePackageName}" EXACT QUIET)
+        find_package("${cmakePackageName}" QUIET)
     elseif("glfw" STREQUAL "${conanPackageName}")
         find_package("${cmakePackageName}" "${cmakePackageVersion}" EXACT QUIET)
     else()
@@ -132,7 +132,7 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
     "$<INSTALL_INTERFACE:include>"
 )
 target_link_libraries("${PROJECT_NAME}" PUBLIC
-    "vulkan::vulkan"
+    "Vulkan::Vulkan"
     "glm::glm"
     "lodepng::lodepng"
 )
