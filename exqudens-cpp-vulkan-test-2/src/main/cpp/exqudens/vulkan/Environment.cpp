@@ -332,7 +332,15 @@ namespace exqudens::vulkan {
     QueueFamilyIndices familyIndices = findQueueFamilies(physicalDevice);
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
-    std::set<uint32_t> uniqueQueueFamilies = {familyIndices.transferFamily.value(), familyIndices.graphicsFamily.value(), familyIndices.presentFamily.value()};
+    /*std::set<uint32_t> uniqueQueueFamilies = {
+        familyIndices.transferFamily.value(),
+        familyIndices.graphicsFamily.value(),
+        familyIndices.presentFamily.value()
+    };*/
+    std::set<uint32_t> uniqueQueueFamilies;
+    uniqueQueueFamilies.insert(familyIndices.transferFamily.value());
+    uniqueQueueFamilies.insert(familyIndices.graphicsFamily.value());
+    uniqueQueueFamilies.insert(familyIndices.presentFamily.value());
 
     float queuePriority = 1.0f;
     for (uint32_t queueFamily : uniqueQueueFamilies) {
