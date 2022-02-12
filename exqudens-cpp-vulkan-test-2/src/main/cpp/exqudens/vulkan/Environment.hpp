@@ -128,8 +128,7 @@ namespace exqudens::vulkan {
           std::function<void(VkDebugUtilsMessageSeverityFlagBitsEXT, VkDebugUtilsMessageTypeFlagsEXT, std::string)> logFunction
       );
 
-      virtual Environment& setFrameBufferWidth(int value);
-      virtual Environment& setFrameBufferHeight(int value);
+      virtual Environment& setFrameBufferSize(const int& width, const int& height);
 
       virtual Environment& setFrameBufferResized();
 

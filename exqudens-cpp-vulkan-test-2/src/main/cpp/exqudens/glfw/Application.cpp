@@ -199,8 +199,7 @@ namespace exqudens::glfw {
         glfwGetFramebufferSize(window, &width, &height);
         glfwWaitEvents();
       }
-      vulkanEnvironment->setFrameBufferWidth(width);
-      vulkanEnvironment->setFrameBufferHeight(height);
+      vulkanEnvironment->setFrameBufferSize(width, height);
       auto current = std::chrono::high_resolution_clock::now();
       if (!updated && std::chrono::duration_cast<std::chrono::seconds>(current-start).count() > 2) {
         start = current;

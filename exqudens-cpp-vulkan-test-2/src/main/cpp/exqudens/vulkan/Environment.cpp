@@ -69,13 +69,9 @@ namespace exqudens::vulkan {
     set();
   }
 
-  Environment& Environment::setFrameBufferWidth(int value) {
-    frameBufferWidth = value;
-    return *this;
-  }
-
-  Environment& Environment::setFrameBufferHeight(int value) {
-    frameBufferHeight = value;
+  Environment& Environment::setFrameBufferSize(const int& width, const int& height) {
+    frameBufferWidth = width;
+    frameBufferHeight = height;
     return *this;
   }
 
