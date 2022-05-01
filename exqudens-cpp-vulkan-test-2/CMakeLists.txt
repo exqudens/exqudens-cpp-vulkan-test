@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.21 FATAL_ERROR)
-get_filename_component(RAW_NAME "${CMAKE_CURRENT_SOURCE_DIR}" NAME)
-string(REPLACE " " "_" NAME "${RAW_NAME}")
-project("${NAME}" VERSION "${CMAKE_PROJECT_VERSION}" LANGUAGES "C" "CXX")
+project("${CMAKE_PROJECT_NAME}-2" VERSION "${CMAKE_PROJECT_VERSION}" LANGUAGES "C" "CXX")
 
 message("project: '${PROJECT_NAME}-${PROJECT_VERSION}'")
 
@@ -16,7 +14,7 @@ set_conan_settings(CONAN_SETTINGS
     "vulkan:build_type=Release"
     "vulkan:compiler.runtime=MD"
     "glfw:build_type=Release"
-    "glfw:compiler.runtime=${CONAN_COMPILER_RUNTIME}"
+    "glfw:compiler.runtime=${CONAN_RELEASE_COMPILER_RUNTIME}"
 )
 
 set_conan_options(CONAN_OPTIONS

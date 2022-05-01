@@ -9,7 +9,8 @@ message("project: '${PROJECT_NAME}-${PROJECT_VERSION}'")
 
 include("util.cmake")
 include("config.cmake")
+enable_testing()
+include("GoogleTest")
 
-#add_subdirectory("${PROJECT_NAME}-0")
-#add_subdirectory("${PROJECT_NAME}-1")
-add_subdirectory("${PROJECT_NAME}-2")
+add_subdirectory("${PROJECT_NAME}-1")
+#add_subdirectory("${PROJECT_NAME}-2")
